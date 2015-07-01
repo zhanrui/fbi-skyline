@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation=" http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+             http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+             http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:db.properties</value>
+                <value>classpath:credit.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 配置数据库连接池 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${pub.platform.db.ConnectionManager.sDBDriver}"/>
+        <property name="url" value="${pub.platform.db.ConnectionManager.sConnStr}"/>
+        <property name="username" value="${pub.platform.db.ConnectionManager.user}"/>
+        <property name="password" value="${pub.platform.db.ConnectionManager.passwd}"/>
+        <property name="maxTotal" value="15"/>
+        <property name="maxIdle" value="5"/>
+
+        <!--
+        <property name="maxWait" value="6000" />
+        <property name="poolPreparedStatements" value="true" />
+        <property name="defaultAutoCommit" value="true" />
+        <property name="initialSize" value="10" />
+        <property name="validationQuery" value="select 1" />
+        <property name="testWhileIdle" value="true" />
+        <property name="timeBetweenEvictionRunsMillis" value="7200000" />
+        -->
+    </bean>
+
+    <!-- transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <!-- enable component scanning (beware that this does not enable mapper scanning!) -->
+    <context:component-scan base-package="skyline"/>
+
+    <!-- enable autowire -->
+    <context:annotation-config/>
+
+    <!--<tx:jta-transaction-manager />-->
+
+    <!-- enable transaction demarcation with annotations -->
+    <tx:annotation-driven/>
+
+    <!-- define the SqlSessionFactory, notice that configLocation is not needed when you use MapperFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations">
+            <list>
+                <value>
+                    classpath:skyline/platform/repository/mapper/**/*.xml
+                </value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- scan for mappers and let them be autowired -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage"
+                  value="skyline.platform.repository.dao"/>
+    </bean>
+
+    <!--apache shiro -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+        <property name="loginUrl" value="/UI/platform/login.html" />
+        <property name="successUrl" value="/UI/platform/home.html" />
+        <property name="unauthorizedUrl" value="/403" />
+
+        <property name="filterChainDefinitions">
+            <value>
+                /toLogin = authc <!-- authc 表示需要认证才能访问的页面 -->
+                /home = authc, perms[/home]  <!-- perms 表示需要该权限才能访问的页面 -->
+            </value>
+        </property>
+    </bean>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="skylineShiroRealm"></property>
+    </bean>
+</beans>
