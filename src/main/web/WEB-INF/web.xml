@@ -35,8 +35,36 @@
         <url-pattern>/platform/*</url-pattern>
     </filter-mapping>
 
+    <!--JSF2-->
+    <!-- Production/Development-->
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+        <!--<param-value>Production</param-value>-->
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!--JSF2 mapping-->
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+
+    <!--primefaces-->
+    <context-param>
+        <param-name>com.sun.faces.allowTextChildren</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>hot-sneaks</param-value>
+    </context-param>
+
     <!--shiro-->
-    <filter>
+   <!-- <filter>
         <filter-name>shiroFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
         <async-supported>true</async-supported>
@@ -49,7 +77,7 @@
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
+    </filter-mapping>-->
 
     <!-- druid -->
     <servlet>
