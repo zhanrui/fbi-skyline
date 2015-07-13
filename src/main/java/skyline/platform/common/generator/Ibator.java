@@ -1,4 +1,4 @@
-package skyline.utils.generator;
+package skyline.platform.common.generator;
 
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;

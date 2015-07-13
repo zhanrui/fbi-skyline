@@ -91,8 +91,5 @@
                   value="skyline.platform.repository.dao"/>
     </bean>
 
-    <!--apache shiro -->
-    <!-- TODO shiro config-->
-
 
 </beans>

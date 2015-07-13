@@ -1,20 +1,20 @@
-package skyline.platform.common;
+package skyline.platform.common.enumeration;
 
 import java.util.Hashtable;
 
 /**
  * 系统平台返回码
  */
-public enum ReturnMessage implements EnumApp {
+public enum ReturnCode implements EnumCode {
 
     PTOPER_NOT_EXIST("1000", "用户不存在"),
     PTOPER_PWD_ERROR("1001", "用户密码错误");
 
     private String code = null;
     private String title = null;
-    private static Hashtable<String, ReturnMessage> aliasEnums;
+    private static Hashtable<String, ReturnCode> aliasEnums;
 
-    ReturnMessage(String code, String title) {
+    ReturnCode(String code, String title) {
         this.init(code, title);
     }
 
@@ -31,7 +31,7 @@ public enum ReturnMessage implements EnumApp {
         aliasEnums.put(title, this);
     }
 
-    public static ReturnMessage valueOfAlias(String alias) {
+    public static ReturnCode valueOfAlias(String alias) {
         return aliasEnums.get(alias);
     }
 

@@ -5,9 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import skyline.platform.repository.model.Ptoper;
-import skyline.spark.RouteRegister;
 import skyline.platform.service.PtoperService;
-import skyline.utils.JsonTransformer;
+import skyline.platform.common.JsonTransformer;
 
 import java.util.List;
 

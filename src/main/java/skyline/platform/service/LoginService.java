@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import skyline.platform.common.ReturnMessage;
+import skyline.platform.common.enumeration.ReturnCode;
 import skyline.platform.repository.dao.PtoperMapper;
 import skyline.platform.repository.model.Ptoper;
 import skyline.platform.repository.model.PtoperExample;
@@ -37,14 +37,14 @@ public class LoginService {
 
         Ptoper oper = qryOper(operid);
         if (oper == null) {
-            msgs.add(ReturnMessage.PTOPER_NOT_EXIST.getCode());
-            msgs.add(ReturnMessage.PTOPER_NOT_EXIST.getTitle());
+            msgs.add(ReturnCode.PTOPER_NOT_EXIST.getCode());
+            msgs.add(ReturnCode.PTOPER_NOT_EXIST.getTitle());
         } else if (!password.equals(oper.getOperpasswd())) {
-            msgs.add(ReturnMessage.PTOPER_PWD_ERROR.getCode());
-            msgs.add(ReturnMessage.PTOPER_PWD_ERROR.getTitle());
+            msgs.add(ReturnCode.PTOPER_PWD_ERROR.getCode());
+            msgs.add(ReturnCode.PTOPER_PWD_ERROR.getTitle());
         } else {
-            msgs.add(ReturnMessage.PTOPER_PWD_ERROR.getCode());
-            msgs.add(ReturnMessage.PTOPER_PWD_ERROR.getTitle());
+            msgs.add(ReturnCode.PTOPER_PWD_ERROR.getCode());
+            msgs.add(ReturnCode.PTOPER_PWD_ERROR.getTitle());
 
             SecurityUtils.getSecurityManager().logout(SecurityUtils.getSubject());
             // 登录后将用户信息存入token

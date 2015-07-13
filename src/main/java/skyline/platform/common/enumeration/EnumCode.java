@@ -1,9 +1,9 @@
-package skyline.platform.common;
+package skyline.platform.common.enumeration;
 
 /**
  * Ã¶¾ÙÂë
  */
-public interface EnumApp {
+public interface EnumCode {
 
     public String getCode();
 

@@ -1,4 +1,4 @@
-package skyline.utils;
+package skyline.platform.common;
 
 import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
