@@ -7,10 +7,10 @@ var TableTree = function() {
             'source': function(id) {
                 return {
                     type: 'GET',
-                    url: 'demo/table_tree.php',
-                    data: {
-                        'id': id
-                    },
+                    url: ' url: '/platform/tree/'+id,
+                    //data: {
+                    //    'id': id
+                    //},
                     dataType: 'json',
                     error: function(XMLHttpRequest) {
                         alert(XMLHttpRequest.status + ': ' + XMLHttpRequest.responseText);
