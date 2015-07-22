@@ -7,7 +7,7 @@ var TableTree = function() {
             'source': function(id) {
                 return {
                     type: 'GET',
-                    url: ' url: '/platform/tree/'+id,
+                    url: '/platform/tree/'+id,
                     //data: {
                     //    'id': id
                     //},

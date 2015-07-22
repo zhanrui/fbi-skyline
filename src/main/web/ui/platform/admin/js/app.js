@@ -232,8 +232,8 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
         // UI Bootstrap
         .state('uibootstrap', {
-            url: "/ui_bootstrap.html",
-            templateUrl: "views/ui_bootstrap.html",
+            url: "/menu",
+            templateUrl: "views/menu.html",
             data: {pageTitle: 'AngularJS UI Bootstrap', pageSubTitle: 'bootstrap components written in angularjs'},
             controller: "GeneralPageController",
             resolve: {
