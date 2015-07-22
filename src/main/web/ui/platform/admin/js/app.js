@@ -7,7 +7,8 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.router", 
     "ui.bootstrap", 
     "oc.lazyLoad",  
-    "ngSanitize"
+    "ngSanitize",
+    "ui.grid"
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
@@ -205,6 +206,25 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         files: [
                             'js/controllers/UISelectController.js'
                         ] 
+                    }]);
+                }]
+            }
+        })
+
+        // 机构管理
+        .state('ptdept', {
+            url: "/ptdept.html",
+            templateUrl: "views/ptdept.html",
+            data: {pageTitle: '机构管理', pageSubTitle: '系统用户所属组织/机构/部门等的管理'},
+            controller: "PtdeptController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before',
+                        files: [
+                            'js/controllers/platform/PtdeptController.js'
+                        ]
                     }]);
                 }]
             }
