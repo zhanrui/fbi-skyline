@@ -1,13 +1,11 @@
 var TableTree = function() {
-
     var demo1 = function() {
-
         jQuery('#gtreetable').gtreetable({
             'draggable': true,
             'source': function(id) {
                 return {
                     type: 'GET',
-                    url: '/platform/tree/'+id,
+                    url: '/platform/tabletree/'+id,
                     //data: {
                     //    'id': id
                     //},

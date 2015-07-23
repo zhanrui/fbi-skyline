@@ -230,7 +230,11 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }
         })
 
-        // UI Bootstrap
+        /**
+         * UI Bootstrap
+         * 菜单管理
+         * huzhenyang
+         */
         .state('uibootstrap', {
             url: "/menu",
             templateUrl: "views/menu.html",
@@ -241,7 +245,12 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                     return $ocLazyLoad.load([{
                         name: 'MetronicApp',
                         files: [
-                            'js/controllers/GeneralPageController.js'
+                            '../../../assets/admin/pages/scripts/table-tree.js',
+                            '../../../assets/global/plugins/bootstrap-gtreetable/bootstrap-gtreetable.min.css',
+                            '../../../assets/global/plugins/jquery-ui/jquery-ui.min.js',
+                            '../../../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
+                            '../../../assets/global/plugins/bootstrap-gtreetable/bootstrap-gtreetable.min.js',
+                            '../../../assets/admin/pages/scripts/table-tree.js'
                         ] 
                     }]);
                 }] 
@@ -261,7 +270,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
                         files: [
                             '../../../assets/global/plugins/jstree/dist/themes/default/style.min.css',
-
                             '../../../assets/global/plugins/jstree/dist/jstree.min.js',
                             '../../../assets/admin/pages/scripts/ui-tree.js',
                             'js/controllers/GeneralPageController.js'

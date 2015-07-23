@@ -16,12 +16,13 @@ import static spark.Spark.get;
 @Component
 public class TreeTableRoutes implements RouteRegister{
     private static final Logger logger = LoggerFactory.getLogger(TreeTableRoutes.class);
-    private static final String GET_TreeTable = "/platform/tree/:id";
+    private static final String GET_TableTree = "/platform/tabletree/:id";
+    private static final String GET_Tree = "/platform/tree";
 
     @Override
     public void regist() {
-
-        get(GET_TreeTable, (request, response) -> {
+        //²Ëµ¥tabletree
+        get(GET_TableTree, (request, response) -> {
             Map records = new HashMap();
             List list = new ArrayList();
             //logger.info(GET_METHOD + GET_TreeTable + ":" + (String) request.params(":id"));
@@ -46,5 +47,49 @@ public class TreeTableRoutes implements RouteRegister{
             return records;
             //response.type("application/json");
         }, new JsonTransformer());
+
+        //²Ëµ¥Tree
+        get(GET_Tree, (request, response) -> {
+            System.out.print("11111111111111111---");
+            String parent = request.params("parent");
+            List list = new ArrayList();
+            String[] states = new String[]{"success", "info", "danger", "warning"};
+
+            if (StringUtils.isBlank(parent)) {
+                for (int i = 0; i < 5; i++) {
+                    Map data2 = new HashMap();
+                    data2.put("id", "Node" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + String.valueOf(Math.random()));
+                    data2.put("text", "Node " + i);
+                    data2.put("icon", "fa fa-folder icon-lg icon-state-" + states[1]);
+                    data2.put("children", true);
+                    data2.put("type", "root");
+                    list.add(data2);
+                }
+            } else {
+                if ("3".equals(String.valueOf(Math.random() * 5))) {
+                    Map data = new HashMap();
+                    data.put("id", "Node" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + String.valueOf(Math.random()));
+                    data.put("text", "No childs ");
+                    data.put("icon", "fa fa-file fa-large icon-state-default");
+                    data.put("children", false);
+                    data.put("state", new HashMap().put("disabled", true));
+                    list.add(data);
+                } else {
+                    for (int i = 0; i < 4; i++) {
+                        Map data = new HashMap();
+                        data.put("id", "Node" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + String.valueOf(Math.random()));
+                        data.put("text", "Node " + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()));
+                        data.put("icon", (Math.random() * 3 == 2 ? "fa fa-file icon-lg" : "fa fa-folder icon-lg icon-state-" + (states[2])));
+                        data.put("children", Math.random() * 3 == 2 ? false : true);
+                        list.add(data);
+                    }
+                }
+            }
+            //response.type("application/json");
+            return list;
+        }, new JsonTransformer());
+
+
+
     }
 }
