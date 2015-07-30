@@ -69,7 +69,13 @@
 			<span class="arrow "></span>
 			</a>
 			<ul class="sub-menu">
-				<li>
+
+				<li ng-repeat="item in menus">
+					<a href="{{item.menuItemUrl}}">
+						<i class="icon-home"></i>&nbsp;&nbsp;{{item.menuItemLabel}}</span>
+					</a>
+				</li>
+				<!--<li>
 					<a href="#/ptdept.html">
 						<i class="icon-home"></i>&nbsp;&nbsp;机构管理</span>
 					</a>
@@ -93,7 +99,7 @@
 					<a href="#/ui_bootstrap.html">
 						<i class="icon-share"></i>&nbsp;&nbsp;角色授权</span>
 					</a>
-				</li>
+				</li>-->
 
 			</ul>
 		</li>

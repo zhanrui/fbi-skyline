@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import skyline.platform.common.enumeration.ReturnCode;
+import skyline.platform.repository.common.MenuItem;
+import skyline.platform.repository.dao.CommonMapper;
 import skyline.platform.repository.dao.PtoperMapper;
 import skyline.platform.repository.model.Ptoper;
 import skyline.platform.repository.model.PtoperExample;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 基于shiro的登录验证和授权
+ * 鍩轰簬shiro鐨勭櫥褰曢獙璇佸拰鎺堟潈
  */
 @Service
 public class LoginService {
@@ -25,8 +27,12 @@ public class LoginService {
     @Autowired
     private PtoperMapper ptoperMapper;
 
+    @Autowired
+    private CommonMapper commonMapper;
+
     /**
-     * 登录验证
+     * 鐧诲綍楠岃瘉
+     *
      * @param operid
      * @param password
      * @return
@@ -47,7 +53,7 @@ public class LoginService {
             msgs.add(ReturnCode.PTOPER_PWD_ERROR.getTitle());
 
             SecurityUtils.getSecurityManager().logout(SecurityUtils.getSubject());
-            // 登录后将用户信息存入token
+            // 鐧诲綍鍚庡皢鐢ㄦ埛淇℃伅瀛樺叆token
             UsernamePasswordToken token = new UsernamePasswordToken(operid, password);
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
@@ -62,6 +68,35 @@ public class LoginService {
         if (opers != null && !opers.isEmpty()) {
             return opers.get(0);
         } else return null;
+    }
+
+    public List<MenuItem> qryMenus(String operid) {
+        List<MenuItem> items = new ArrayList<>();
+
+
+
+
+       /* MenuItem item2 = new MenuItem();
+        item2.setLevelidx("10");
+        item2.setMenuItemIsLeaf("1");
+        item2.setMenuItemId("1");
+        item2.setMenuLevel("1");
+        item2.setMenuItemPId("0");
+        item2.setMenuItemLabel("鏈烘瀯绠＄悊");
+        item2.setMenuItemUrl("#/ptdept.html");
+        items.add(item2);
+
+
+        MenuItem item3 = new MenuItem();
+        item3.setLevelidx("10");
+        item3.setMenuItemIsLeaf("1");
+        item3.setMenuItemId("1");
+        item3.setMenuLevel("1");
+        item3.setMenuItemPId("0");
+        item3.setMenuItemLabel("鐢ㄦ埛绠＄悊");
+        item3.setMenuItemUrl("#/file_upload.html");
+        items.add(item3);*/
+        return commonMapper.qryMenus(operid);
     }
 
 }

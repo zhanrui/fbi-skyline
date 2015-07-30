@@ -8,6 +8,8 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.bootstrap", 
     "oc.lazyLoad",  
     "ngSanitize",
+    "ngTouch",
+    "ngResource",
     "ui.grid"
 ]); 
 
@@ -106,10 +108,18 @@ MetronicApp.controller('HeaderController', ['$scope', function($scope) {
 }]);
 
 /* Setup Layout Part - Sidebar */
-MetronicApp.controller('SidebarController', ['$scope', function($scope) {
+MetronicApp.controller('SidebarController', ['$scope', '$http', function($scope, $http) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initSidebar(); // init sidebar
     });
+    // TODO
+    $http.get('/skyline/platform/menus').
+        success(function (data, status, headers) {
+            $scope.menus = data;
+        }).
+        error(function (data, status, headers) {
+            $scope.errmsg = headers.errmsg;
+        });
 }]);
 
 /* Setup Layout Part - Sidebar */

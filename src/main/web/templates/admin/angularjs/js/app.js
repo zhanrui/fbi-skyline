@@ -109,6 +109,7 @@ MetronicApp.controller('SidebarController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initSidebar(); // init sidebar
     });
+
 }]);
 
 /* Setup Layout Part - Sidebar */

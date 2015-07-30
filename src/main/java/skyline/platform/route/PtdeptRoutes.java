@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import skyline.platform.common.JsonTransformer;
 import skyline.platform.repository.model.Ptdept;
-import skyline.platform.repository.model.Ptoper;
 import skyline.platform.service.PtdeptService;
-import skyline.platform.service.PtoperService;
 
 import java.util.List;
 
@@ -25,6 +23,7 @@ public class PtdeptRoutes implements RouteRegister {
     private static final Logger logger = LoggerFactory.getLogger(PtdeptRoutes.class);
 
     private static final String GET_QRY_DEPTS = "/platform/ptdept";
+    private static final String GET_QRY_DEPT_BY_ID = "/platform/ptdept/:id";
 
     @Autowired
     private PtdeptService ptdeptService;
@@ -40,6 +39,15 @@ public class PtdeptRoutes implements RouteRegister {
 
             response.status(200);
             return depts;
+        }, new JsonTransformer());
+
+        // 查询所有机构列表
+        get(GET_QRY_DEPT_BY_ID, (request, response) -> {
+
+            Ptdept dept = ptdeptService.qryDeptById((String) request.params(":id"));
+            logger.info(GET_METHOD + GET_QRY_DEPTS);
+            response.status(200);
+            return dept;
         }, new JsonTransformer());
     }
 }

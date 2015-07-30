@@ -5,11 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import skyline.platform.repository.dao.PtdeptMapper;
-import skyline.platform.repository.dao.PtoperMapper;
 import skyline.platform.repository.model.Ptdept;
 import skyline.platform.repository.model.PtdeptExample;
-import skyline.platform.repository.model.Ptoper;
-import skyline.platform.repository.model.PtoperExample;
 
 import java.util.List;
 
@@ -27,5 +24,11 @@ public class PtdeptService {
         PtdeptExample example = new PtdeptExample();
         example.createCriteria().andDeptidIsNotNull();
         return ptdeptMapper.selectByExample(example);
+    }
+
+    public Ptdept qryDeptById(String id) {
+        PtdeptExample example = new PtdeptExample();
+        example.createCriteria().andDeptidEqualTo(id);
+        return ptdeptMapper.selectByPrimaryKey(id);
     }
 }
