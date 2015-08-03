@@ -260,25 +260,8 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             '../../../assets/global/plugins/jquery-ui/jquery-ui.min.js',
                             '../../../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
                             '../../../assets/global/plugins/bootstrap-gtreetable/bootstrap-gtreetable.min.js',
-                            '../../../assets/admin/pages/scripts/table-tree.js'
-                        ] 
-                    }]);
-                }] 
-            }
-        })
-
-        // Tree View
-        .state('tree', {
-            url: "/tree",
-            templateUrl: "views/tree.html",
-            data: {pageTitle: 'jQuery Tree View', pageSubTitle: 'tree view samples'},
-            controller: "GeneralPageController",
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load([{
-                        name: 'MetronicApp',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
-                        files: [
+                            '../../../assets/admin/pages/scripts/table-tree.js',
+                            //tree
                             '../../../assets/global/plugins/jstree/dist/themes/default/style.min.css',
                             '../../../assets/global/plugins/jstree/dist/jstree.min.js',
                             '../../../assets/admin/pages/scripts/ui-tree.js',
@@ -287,8 +270,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                     }]);
                 }] 
             }
-        })     
-
+        })
         // Form Tools
         .state('formtools', {
             url: "/form-tools",

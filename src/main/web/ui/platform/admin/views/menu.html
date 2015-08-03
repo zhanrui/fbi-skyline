@@ -1,21 +1,53 @@
-<div class="portlet-body">
-	<table class="table table-hover table-light gtreetable" id="gtreetable">
-		<thead>
-		<tr>
-			<th>
-				Nested Tree Table
-			</th>
-		</tr>
-		</thead>
-	</table>
+<div class="row">
+	<div class="col-md-4">
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs font-green-sharp"></i>
+					<span class="caption-subject font-green-sharp bold uppercase">Contextual Menu with Drag & Drop</span>
+				</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse">
+					</a>
+					<a href="#portlet-config" data-toggle="modal" class="config">
+					</a>
+					<a href="javascript:;" class="reload">
+					</a>
+					<a href="javascript:;" class="remove">
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div id="tree" class="tree-demo"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="portlet light">
+			<div class="portlet-body">
+				<table class="table table-hover table-light gtreetable"  id="gtreetable">
+					<thead>
+					<tr>
+						<th>
+							Nested Tree Table
+						</th>
+					</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
-<!-- END PAGE LEVEL SCRIPTS -->
+
+
 <script>
 	jQuery(document).ready(function() {
 		Metronic.init(); // init metronic core components
 		Layout.init(); // init current layout
 		Demo.init(); // init demo features
 		TableTree.init(); // init demo page
+		//tree
+		UITree.init(); // init todo page
 	});
 </script>
 <!-- END JAVASCRIPTS -->
